@@ -23,8 +23,8 @@ on:   # 配置触发workflow的事件
 # 定义 APP_NAME 用于 docker build-args
 # 定义 DOCKERHUB_REPO 标记 docker hub repo 名称
 env:
-  APP_NAME: ms_e5_api
-  DOCKERHUB_REPO: yourwit/ms_e5_api
+  APP_NAME: ${{ secrets.APP_NAME }}
+  DOCKERHUB_REPO: ${{ secrets.FULL_DOCKER_REPO_NAME }}
 
 jobs:
   main:
@@ -73,6 +73,5 @@ jobs:
             APP_VERSION=${{ env.APP_VERSION }}
           # 生成两个 docker tag: ${today} 和 latest
           tags: |
-            #${{ env.DOCKERHUB_REPO }}:${{ env.APP_VERSION }}
             ${{ env.DOCKERHUB_REPO }}:${{ steps.date.outputs.today }}
             ${{ env.DOCKERHUB_REPO }}:latest
