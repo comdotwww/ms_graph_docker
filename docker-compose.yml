@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  arbot:
+    image: yourwit/ms_graph_docker
+    # bridge = 默认的网络模式，容器之间不需要互相通信
+    # host = 移除了宿主机与容器之间的网络隔离，容器直接使用宿主机的网络，这样就能在容器中访问宿主机网络
+    # none = 禁用所有的网络
+    # service:[service name]
+    # container:[container name/id]
+    network_mode: bridge
+    restart: always
+    container_name: ms_graph_docker
+    # volumes:
+    environment:
+      TZ: Asia/Shanghai
+      TG_BOT_TOKEN: 11111:11111 # telegram bot token，可通过 t.me/botfather 获取
+      TG_SEND_ID: 11111  # telegram bot 主人的id
+      CLIENT_ID: client_idclient_idclient_idclient_id
+      CLIENT_SECRET: client_secretclient_secretclient_secretclient_secret
+      PROXY_URL: "null"  # 可选 代理 url ，如反向代理地址 http://example.com/ 则填写 example.com 设置方法 https://www.hostloc.com/thread-805441-1-1.html
