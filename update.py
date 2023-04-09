@@ -17,6 +17,7 @@ import time
 path = sys.path[0]+r'/token.txt'
 client_id = os.getenv('CLIENT_ID')
 client_secret = os.getenv('CLIENT_SECRET')
+token_first = os.getenv('TOKEN_FIRST')
 
 # 获取token并写入
 def gettoken(refresh_token):

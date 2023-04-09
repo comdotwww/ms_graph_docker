@@ -2,9 +2,9 @@
 name: Publish Docker image   # workflow名称，可以在Github项目主页的【Actions】中看到所有的workflow
 
 on:   # 配置触发workflow的事件
-  #push:
-    #branches:   # master分支有push时触发此workflow
-      #- 'master'
+  push:
+    branches:   # master分支有push时触发此workflow
+      - 'master'
     #tags:       # tag更新时触发此workflow
       #- '*'
   workflow_dispatch:

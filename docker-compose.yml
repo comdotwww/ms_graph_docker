@@ -18,4 +18,5 @@ services:
       TG_SEND_ID: "11111" # telegram bot 主人的id
       CLIENT_ID: "client_idclient_idclient_idclient_id"
       CLIENT_SECRET: "client_secretclient_secretclient_secretclient_secret"
+      TOKEN_FIRST: "" #必填
       PROXY_URL: "null" # 可选 代理 url ，如反向代理地址 http://example.com/ 则填写 example.com 设置方法 https://www.hostloc.com/thread-805441-1-1.html
