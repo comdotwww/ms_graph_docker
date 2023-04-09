@@ -22,45 +22,45 @@ token_first = os.getenv('TOKEN_FIRST')
 # 获取token并写入
 
 
-def gettoken(refresh_token):
-    # client_id client_secret 不存在，跳过
-    if not client_id or not client_secret:
-        SendMessage.send_tg_msg(r"client_id client_secret 不存在，跳过")
-        SendMessage.send_tg_msg(r"更新 token 失败")
-        return
+class Update:
+    def gettoken(refresh_token):
+        # client_id client_secret 不存在，跳过
+        if not client_id or not client_secret:
+            SendMessage.send_tg_msg(r"client_id client_secret 不存在，跳过")
+            SendMessage.send_tg_msg(r"更新 token 失败")
+            return
 
-    headers = {'Content-Type': 'application/x-www-form-urlencoded',
-               'User-Agent': UserAgent().random
-               }
-    data = {'grant_type': 'refresh_token',
-            'refresh_token': refresh_token,
-            'client_id': client_id,
-            'client_secret': client_secret,
-            'redirect_uri': 'http://localhost:53682/'
-            }
-    html = req.post(
-        'https://login.microsoftonline.com/common/oauth2/v2.0/token', data=data, headers=headers)
-    jsontxt = json.loads(html.text)
-    refresh_token = jsontxt['refresh_token']
-    access_token = jsontxt['access_token']
-    with open(path, 'w+') as f:
-        f.write(refresh_token)
-        f.close()
+        headers = {'Content-Type': 'application/x-www-form-urlencoded',
+                   'User-Agent': UserAgent().random
+                   }
+        data = {'grant_type': 'refresh_token',
+                'refresh_token': refresh_token,
+                'client_id': client_id,
+                'client_secret': client_secret,
+                'redirect_uri': 'http://localhost:53682/'
+                }
+        html = req.post(
+            'https://login.microsoftonline.com/common/oauth2/v2.0/token', data=data, headers=headers)
+        jsontxt = json.loads(html.text)
+        refresh_token = jsontxt['refresh_token']
+        access_token = jsontxt['access_token']
+        with open(path, 'w+') as f:
+            f.write(refresh_token)
+            f.close()
+
+    def update_token():
+        try:
+            fo = open(path, "r+")
+            refresh_token = fo.read()
+            if len(refresh_token) < 5:
+                refresh_token = token_first
+            fo.close()
+            gettoken(refresh_token)
+            SendMessage.send_tg_msg(r"更新 token 成功")
+        except:
+            SendMessage.send_tg_msg(r"更新 token 失败")
+            return
 
 
-def main():
-    try:
-        fo = open(path, "r+")
-        refresh_token = fo.read()
-        if len(refresh_token) < 5:
-            refresh_token = token_first
-        fo.close()
-        gettoken(refresh_token)
-        SendMessage.send_tg_msg(r"更新 token 成功")
-    except:
-        SendMessage.send_tg_msg(r"更新 token 失败")
-        return
-
-
-if __name__ == '__main__':
-    main()
+    if __name__ == '__main__':
+        update_token()

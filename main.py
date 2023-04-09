@@ -7,6 +7,7 @@ import random
 import os
 from fake_useragent import UserAgent
 from SendMsg import SendMessage
+from update import Update
 # 先注册azure应用,确保应用有以下权限:
 # files:	Files.Read.All、Files.ReadWrite.All、Sites.Read.All、Sites.ReadWrite.All
 # user:	User.Read.All、User.ReadWrite.All、Directory.Read.All、Directory.ReadWrite.All
@@ -38,7 +39,7 @@ def gettoken(refresh_token):
     return access_token
 
 
-def main():
+def use_api():
     fo = open(path, "r+")
     refresh_token = fo.read()
     fo.close()
@@ -114,9 +115,10 @@ def main():
 
 
 if __name__ == '__main__':
+    Update.update_token()
     cycle_count = random.randint(10, 20)
     for i in range(cycle_count):
-        print("第"+str(i)+"次循环")
-        SendMessage.send_tg_msg(r"第"+str(i)+r"次循环")
+        print("第"+str(i+1)+"次循环")
+        SendMessage.send_tg_msg(r"第"+str(i+1)+r"次循环")
         time.sleep(random.randint(1200, 2400))
-        main()
+        use_api()

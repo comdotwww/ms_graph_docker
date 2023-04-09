@@ -6,6 +6,5 @@ RUN apt-get update && apt-get -y install cron
 COPY . /app
 RUN python -m pip install --upgrade pip && pip3 --no-cache-dir install --user -r /app/requirements.txt
 WORKDIR /app
-RUN python3 update.py
 # -u print打印出来
 CMD ["python3", "-u", "main.py"]
