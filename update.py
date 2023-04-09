@@ -5,7 +5,6 @@ from SendMsg import SendMessage
 import json
 import os
 import sys
-import time
 # 先注册azure应用,确保应用有以下权限:
 # files:	Files.Read.All、Files.ReadWrite.All、Sites.Read.All、Sites.ReadWrite.All
 # user:	User.Read.All、User.ReadWrite.All、Directory.Read.All、Directory.ReadWrite.All
@@ -55,12 +54,11 @@ class Update:
             if len(refresh_token) < 5:
                 refresh_token = token_first
             fo.close()
-            gettoken(refresh_token)
+            Update.gettoken(refresh_token)
             SendMessage.send_tg_msg(r"更新 token 成功")
         except:
             SendMessage.send_tg_msg(r"更新 token 失败")
             return
-
 
     if __name__ == '__main__':
         update_token()
