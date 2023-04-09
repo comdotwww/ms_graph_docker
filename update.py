@@ -52,6 +52,8 @@ def main():
     try:
         fo = open(path, "r+")
         refresh_token = fo.read()
+        if len(refresh_token) < 5:
+            refresh_token = token_first
         fo.close()
         gettoken(refresh_token)
         SendMessage.send_tg_msg(r"更新 token 成功")
