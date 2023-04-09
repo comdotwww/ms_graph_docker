@@ -1,8 +1,8 @@
 #pip install pipreqs
 #pipreqs requirements.txt
-FROM python:3.10.7-slim-buster
+FROM python:3-slim-buster
 
-RUN apt-get update && apt-get -y install cron 
+# RUN apt-get update && apt-get -y install cron 
 COPY . /app
 RUN python -m pip install --upgrade pip && pip3 --no-cache-dir install --user -r /app/requirements.txt
 WORKDIR /app
