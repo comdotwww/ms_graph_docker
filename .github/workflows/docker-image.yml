@@ -37,7 +37,7 @@ jobs:
       # 设置时间戳环境变量
       - name: Get current date for docker image tag
         id: date
-        run: echo "today=$(date +'%Y%m%d_%H%M%S')" >> $GITHUB_OUTPUT
+        run: echo "today=$(TZ=Asia/Shanghai date +'%Y%m%d_%H%M%S')" >> $GITHUB_OUTPUT
       # 设置 QEMU, 后面 docker buildx 依赖此.
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
