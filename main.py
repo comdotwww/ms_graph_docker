@@ -120,5 +120,5 @@ if __name__ == '__main__':
     for i in range(cycle_count):
         print("第"+str(i+1)+"次循环")
         SendMessage.send_tg_msg(r"第"+str(i+1)+r"次循环")
-        time.sleep(random.randint(1200, 2400))
+        time.sleep(random.randint(10, 20))
         use_api()
