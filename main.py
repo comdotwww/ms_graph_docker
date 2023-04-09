@@ -13,7 +13,7 @@ from update import Update
 # user:	User.Read.All、User.ReadWrite.All、Directory.Read.All、Directory.ReadWrite.All
 # mail:  Mail.Read、Mail.ReadWrite、MailboxSettings.Read、MailboxSettings.ReadWrite
 # 注册后一定要再点代表xxx授予管理员同意,否则outlook api无法调用
-# redirect_uri 是 http://localhost:53689/
+# redirect_uri 是 http://localhost:53682/
 
 path = sys.path[0]+r'/token.txt'
 num1 = 0
@@ -62,7 +62,7 @@ def use_api():
         r'https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messageRules',
         r'https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messageRules',
         r'https://graph.microsoft.com/v1.0/me/drive/root/children',
-        r'https://api.powerbi.com/v1.0/myorg/apps',
+        # r'https://api.powerbi.com/v1.0/myorg/apps',
         r'https://graph.microsoft.com/v1.0/me/mailFolders',
         r'https://graph.microsoft.com/v1.0/me/outlook/masterCategories',
     ]

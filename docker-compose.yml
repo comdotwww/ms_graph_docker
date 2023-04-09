@@ -1,7 +1,7 @@
 version: "3.7"
 
 services:
-  arbot:
+  ms_graph_docker:
     image: yourwit/ms_graph_docker:latest
     # bridge = 默认的网络模式，容器之间不需要互相通信
     # host = 移除了宿主机与容器之间的网络隔离，容器直接使用宿主机的网络，这样就能在容器中访问宿主机网络
@@ -9,7 +9,7 @@ services:
     # service:[service name]
     # container:[container name/id]
     network_mode: bridge
-    restart: always
+    # restart: always
     container_name: ms_graph_docker
     # volumes:
     environment:
