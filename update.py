@@ -1,4 +1,5 @@
 # -*- coding: UTF-8 -*-
+import time
 import requests as req
 from fake_useragent import UserAgent
 from SendMsg import SendMessage
@@ -25,8 +26,10 @@ class Update:
     def gettoken(refresh_token):
         # client_id client_secret 不存在，跳过
         if not client_id or not client_secret:
-            SendMessage.send_tg_msg(r"client_id client_secret 不存在，跳过")
-            SendMessage.send_tg_msg(r"更新 token 失败")
+            SendMessage.send_tg_msg(time.strftime(
+                r"%Y-%m-%d %H:%M:%S", time.localtime()) + "\n" + r"client_id client_secret 不存在，跳过")
+            SendMessage.send_tg_msg(time.strftime(
+                r"%Y-%m-%d %H:%M:%S", time.localtime()) + "\n" + r"更新 token 失败")
             return
 
         headers = {'Content-Type': 'application/x-www-form-urlencoded',
@@ -42,7 +45,7 @@ class Update:
             'https://login.microsoftonline.com/common/oauth2/v2.0/token', data=data, headers=headers)
         jsontxt = json.loads(html.text)
         refresh_token = jsontxt['refresh_token']
-        access_token = jsontxt['access_token']
+        # access_token = jsontxt['access_token']
         with open(path, 'w+') as f:
             f.write(refresh_token)
             f.close()
@@ -55,9 +58,11 @@ class Update:
                 refresh_token = token_first
             fo.close()
             Update.gettoken(refresh_token)
-            SendMessage.send_tg_msg(r"更新 token 成功")
+            SendMessage.send_tg_msg(time.strftime(
+                r"%Y-%m-%d %H:%M:%S", time.localtime()) + "\n" + r"更新 token 成功")
         except:
-            SendMessage.send_tg_msg(r"更新 token 失败")
+            SendMessage.send_tg_msg(time.strftime(
+                r"%Y-%m-%d %H:%M:%S", time.localtime()) + "\n" + r"更新 token 失败！！！！！！！")
             return
 
     if __name__ == '__main__':

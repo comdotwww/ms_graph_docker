@@ -1,6 +1,6 @@
 #pip install pipreqs
 #pipreqs requirements.txt
-FROM python:3-slim-buster
+FROM python:3.9-alpine
 
 # RUN apt-get update && apt-get -y install cron 
 COPY . /app

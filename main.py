@@ -44,81 +44,55 @@ def use_api():
     refresh_token = fo.read()
     fo.close()
     global num1
-    localtime = time.asctime(time.localtime(time.time()))
     access_token = gettoken(refresh_token)
     headers = {
         'Authorization': access_token,
         'Content-Type': 'application/json',
         'User-Agent': UserAgent().random
     }
-    print('此次运行开始时间为 :', localtime)
-    SendMessage.send_tg_msg(r'此次运行开始时间为 :' + str(localtime))
-    try:
-        if req.get(r'https://graph.microsoft.com/v1.0/me/drive/root', headers=headers).status_code == 200:
-            num1 += 1
-            print("1调用成功"+str(num1)+'次')
-            SendMessage.send_tg_msg(r'1 调用成功 :' + str(num1) + r'次')
-            time.sleep(random.randint(2, 5))
-        if req.get(r'https://graph.microsoft.com/v1.0/me/drive', headers=headers).status_code == 200:
-            num1 += 1
-            print("2调用成功"+str(num1)+'次')
-            SendMessage.send_tg_msg(r'2 调用成功 :' + str(num1) + r'次')
-            time.sleep(random.randint(2, 5))
-        if req.get(r'https://graph.microsoft.com/v1.0/drive/root', headers=headers).status_code == 200:
-            num1 += 1
-            print('3调用成功'+str(num1)+'次')
-            SendMessage.send_tg_msg(r'3 调用成功 :' + str(num1) + r'次')
-            time.sleep(random.randint(2, 5))
-        if req.get(r'https://graph.microsoft.com/v1.0/users ', headers=headers).status_code == 200:
-            num1 += 1
-            print('4调用成功'+str(num1)+'次')
-            SendMessage.send_tg_msg(r'4 调用成功 :' + str(num1) + r'次')
-            time.sleep(random.randint(2, 5))
-        if req.get(r'https://graph.microsoft.com/v1.0/me/messages', headers=headers).status_code == 200:
-            num1 += 1
-            print('5调用成功'+str(num1)+'次')
-            SendMessage.send_tg_msg(r'5 调用成功 :' + str(num1) + r'次')
-            time.sleep(random.randint(2, 5))
-        if req.get(r'https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messageRules', headers=headers).status_code == 200:
-            num1 += 1
-            print('6调用成功'+str(num1)+'次')
-            SendMessage.send_tg_msg(r'6 调用成功 :' + str(num1) + r'次')
-            time.sleep(random.randint(2, 5))
-        if req.get(r'https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messageRules', headers=headers).status_code == 200:
-            num1 += 1
-            print('7调用成功'+str(num1)+'次')
-            SendMessage.send_tg_msg(r'7 调用成功 :' + str(num1) + r'次')
-            time.sleep(random.randint(2, 5))
-        if req.get(r'https://graph.microsoft.com/v1.0/me/drive/root/children', headers=headers).status_code == 200:
-            num1 += 1
-            print('8调用成功'+str(num1)+'次')
-            SendMessage.send_tg_msg(r'8 调用成功 :' + str(num1) + r'次')
-            time.sleep(random.randint(2, 5))
-        if req.get(r'https://api.powerbi.com/v1.0/myorg/apps', headers=headers).status_code == 200:
-            num1 += 1
-            print('9调用成功'+str(num1)+'次')
-            SendMessage.send_tg_msg(r'9 调用成功 :' + str(num1) + r'次')
-            time.sleep(random.randint(2, 5))
-        if req.get(r'https://graph.microsoft.com/v1.0/me/mailFolders', headers=headers).status_code == 200:
-            num1 += 1
-            print('10调用成功'+str(num1)+'次')
-            SendMessage.send_tg_msg(r'10 调用成功 :' + str(num1) + r'次')
-            time.sleep(random.randint(2, 5))
-        if req.get(r'https://graph.microsoft.com/v1.0/me/outlook/masterCategories', headers=headers).status_code == 200:
-            num1 += 1
-            print('11调用成功'+str(num1)+'次')
-            SendMessage.send_tg_msg(r'11 调用成功 :' + str(num1) + r'次')
-            time.sleep(random.randint(2, 5))
-    except:
-        print("pass")
-        pass
+    print('此次运行开始时间为 :', time.strftime(r"%Y-%m-%d %H:%M:%S", time.localtime()))
+    SendMessage.send_tg_msg(
+        r'此次运行开始时间为 :' + time.strftime(r"%Y-%m-%d %H:%M:%S", time.localtime()))
+    api_urls = [
+        r'https://graph.microsoft.com/v1.0/me/drive/root',
+        r'https://graph.microsoft.com/v1.0/me/drive',
+        r'https://graph.microsoft.com/v1.0/drive/root',
+        r'https://graph.microsoft.com/v1.0/users',
+        r'https://graph.microsoft.com/v1.0/me/messages',
+        r'https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messageRules',
+        r'https://graph.microsoft.com/v1.0/me/mailFolders/inbox/messageRules',
+        r'https://graph.microsoft.com/v1.0/me/drive/root/children',
+        r'https://api.powerbi.com/v1.0/myorg/apps',
+        r'https://graph.microsoft.com/v1.0/me/mailFolders',
+        r'https://graph.microsoft.com/v1.0/me/outlook/masterCategories',
+    ]
+
+    for url in api_urls:
+        try:
+            if req.get(url, headers=headers).status_code == 200:
+                num1 += 1
+                print(r"调用成功" + str(num1) + r'次')
+                SendMessage.send_tg_msg(r'调用成功 :' + str(num1) + r'次')
+                time.sleep(random.randint(5, 10))
+            else:
+                print(time.strftime(r"%Y-%m-%d %H:%M:%S", time.localtime()
+                                    ) + "\n" + r"！！！状态码不是 200 ，api 是 " + url + r' ！！！')
+                SendMessage.send_tg_msg(
+                    time.strftime(r"%Y-%m-%d %H:%M:%S", time.localtime()) + "\n" + r"！！！状态码不是 200 ，api 是 " + url + r' ！！！')
+                time.sleep(random.randint(5, 10))
+        except Exception as e:
+            print(r"！！！调用接口失败，api 是 " + url + r' ！！！')
+            print(e.args)
+            SendMessage.send_tg_msg(r"！！！调用失败，api 是 " + url + r' ！！！')
+            SendMessage.send_tg_msg(e.args)
+            time.sleep(random.randint(5, 10))
 
 
 if __name__ == '__main__':
     Update.update_token()
     cycle_count = random.randint(10, 20)
     for i in range(cycle_count):
-        print("第"+str(i+1)+"次循环")
-        SendMessage.send_tg_msg(r"第"+str(i+1)+r"次循环")
-        time.sleep(random.randint(10, 20))
+        print(r"第" + str(i + 1) + r"次循环")
+        SendMessage.send_tg_msg(r"第" + str(i + 1) + r"次循环")
         use_api()
+        time.sleep(random.randint(30, 60))
