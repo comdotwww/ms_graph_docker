@@ -11,7 +11,7 @@ import time
 # user:	User.Read.All、User.ReadWrite.All、Directory.Read.All、Directory.ReadWrite.All
 # mail:  Mail.Read、Mail.ReadWrite、MailboxSettings.Read、MailboxSettings.ReadWrite
 # 注册后一定要再点代表xxx授予管理员同意,否则outlook api无法调用
-# redirect_uri 是 http://localhost:53689/
+# redirect_uri 是 http://localhost:53682/
 
 
 path = sys.path[0]+r'/token.txt'
@@ -20,6 +20,8 @@ client_secret = os.getenv('CLIENT_SECRET')
 token_first = os.getenv('TOKEN_FIRST')
 
 # 获取token并写入
+
+
 def gettoken(refresh_token):
     # client_id client_secret 不存在，跳过
     if not client_id or not client_secret:
@@ -34,7 +36,7 @@ def gettoken(refresh_token):
             'refresh_token': refresh_token,
             'client_id': client_id,
             'client_secret': client_secret,
-            'redirect_uri': 'http://localhost:53689/'
+            'redirect_uri': 'http://localhost:53682/'
             }
     html = req.post(
         'https://login.microsoftonline.com/common/oauth2/v2.0/token', data=data, headers=headers)
