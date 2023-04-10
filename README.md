@@ -32,6 +32,7 @@ CLIENT_ID: "client_id" # 必填
 CLIENT_SECRET: "client_secret" # 必填
 TOKEN_FIRST: "" #必填
 PROXY_URL: "null"  # 选填 代理 url ，如反向代理地址 http://example.com/ 则填写 example.com 设置方法 https://www.hostloc.com/thread-805441-1-1.html
+IS_API_URLS_EXTEND: "false" # 可选 是否调用补充 api 接口
 ```
 可以先手动执行一次，看看是否成功
 ```
@@ -41,6 +42,20 @@ docker compose up -d
 查看日志，看看是否成功
 ```
 docker logs -f ms_graph_docker
+```
+
+## (可选)补充 API 授权
+```
+# 下面的 api 按需授权
+    # graph
+    graph_api_urls_extend = [
+        r'/me/calendars',  # Calendars.Read
+        r'/me/contacts',  # Contacts.Read
+    ]
+    other_api_urls_extend = [
+        # Power BI 服务
+        r'https://api.powerbi.com/v1.0/myorg/apps',  # Tenant.Read.All
+    ]
 ```
 
 ## 周期执行

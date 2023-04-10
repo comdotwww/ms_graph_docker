@@ -13,6 +13,7 @@ services:
     container_name: ms_graph_docker
     # volumes:
     environment:
+      # 以下配置项值均为字符串
       TZ: "Asia/Shanghai"
       TG_BOT_TOKEN: "11111:11111" # telegram bot token，可通过 t.me/botfather 获取
       TG_SEND_ID: "11111" # telegram bot 主人的id
@@ -20,3 +21,4 @@ services:
       CLIENT_SECRET: "client_secretclient_secretclient_secretclient_secret"
       TOKEN_FIRST: "" #必填
       PROXY_URL: "null" # 可选 代理 url ，如反向代理地址 http://example.com/ 则填写 example.com 设置方法 https://www.hostloc.com/thread-805441-1-1.html
+      IS_API_URLS_EXTEND: "false" # 可选 是否调用补充的 api 接口
