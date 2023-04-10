@@ -83,8 +83,7 @@ def use_api():
         base_graph_url + r'/me/contacts',  # Contacts.Read
     ]
     other_api_urls_extend = [
-        # Power BI 服务
-        r'https://api.powerbi.com/v1.0/myorg/apps',  # Tenant.Read.All
+
     ]
 
     for url in graph_api_urls:
@@ -109,6 +108,7 @@ def use_api():
             SendMessage.send_tg_msg(e.args)
             time.sleep(random.randint(5, 10))
 
+    # 补充API
     if is_api_urls_extend.lower() == "true":
         for url in graph_api_urls_extend + other_api_urls_extend:
             try:
