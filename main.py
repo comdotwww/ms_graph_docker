@@ -91,7 +91,7 @@ def use_api():
             if req.get(base_graph_url + url, headers=headers).status_code == 200:
                 num1 += 1
                 print(r"调用成功" + str(num1) + r'次')
-                SendMessage.send_tg_msg(r'调用成功 :' + str(num1) + r'次')
+                SendMessage.send_tg_msg(r'调用成功: ' + str(num1) + r' 次')
                 time.sleep(random.randint(5, 10))
             else:
                 print(time.strftime(r"%Y-%m-%d %H:%M:%S", time.localtime()) +
@@ -102,20 +102,23 @@ def use_api():
                     + base_graph_url + url + r' ！！！')
                 time.sleep(random.randint(5, 10))
         except Exception as e:
-            print(r"！！！调用接口失败，api 是 " + url + r' ！！！')
+            print(r"！！！调用接口失败，api 是 " + base_graph_url + url + r' ！！！')
             print(e.args)
-            SendMessage.send_tg_msg(r"！！！调用失败，api 是 " + url + r' ！！！')
+            SendMessage.send_tg_msg(
+                r"！！！调用失败，api 是 " + base_graph_url + url + r' ！！！')
             SendMessage.send_tg_msg(e.args)
             time.sleep(random.randint(5, 10))
 
     # 补充API
     if is_api_urls_extend.lower() == "true":
+        print(r"调用补充 API 地址 开始")
+        SendMessage.send_tg_msg(r"调用补充 API 地址 开始")
         for url in graph_api_urls_extend + other_api_urls_extend:
             try:
                 if req.get(url, headers=headers).status_code == 200:
                     num1 += 1
                     print(r"调用成功" + str(num1) + r'次')
-                    SendMessage.send_tg_msg(r'调用成功 :' + str(num1) + r'次')
+                    SendMessage.send_tg_msg(r'调用成功: ' + str(num1) + r' 次')
                     time.sleep(random.randint(5, 10))
                 else:
                     print(time.strftime(r"%Y-%m-%d %H:%M:%S", time.localtime()
@@ -130,6 +133,8 @@ def use_api():
                 SendMessage.send_tg_msg(r"！！！调用失败，api 是 " + url + r' ！！！')
                 SendMessage.send_tg_msg(e.args)
                 time.sleep(random.randint(5, 10))
+        print(r"调用补充 API 地址 结束")
+        SendMessage.send_tg_msg(r"调用补充 API 地址 结束")
 
 
 if __name__ == '__main__':
