@@ -13,7 +13,7 @@ class SendMessage:
             print("TG_BOT_TOKEN 或者 TG_SEND_ID 不存在")
             return
         PROXY_URL = os.getenv('PROXY_URL')
-        if not PROXY_URL or PROXY_URL == "null":
+        if not PROXY_URL or PROXY_URL.lower() == "null":
             PROXY_URL = "api.telegram.org"
         try:
             headers = {
