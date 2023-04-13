@@ -136,8 +136,27 @@ def use_api():
         print(r"调用补充 API 地址 结束")
         SendMessage.send_tg_msg(r"调用补充 API 地址 结束")
 
+# 计算调用耗时
+def format_time(time_diff):
+    if time_diff < 60:
+        return "耗时%.0f秒" % time_diff
+    elif time_diff < 3600:
+        minutes, seconds = divmod(time_diff, 60)
+        return "耗时%d分%.0f秒" % (minutes, seconds)
+    else:
+        hours, seconds = divmod(time_diff, 3600)
+        minutes, seconds = divmod(seconds, 60)
+        return "耗时%d小时%d分%.0f秒" % (hours, minutes, seconds)
+
 
 if __name__ == '__main__':
+    start_time = time.time()
+
+    print(time.strftime(r"%Y-%m-%d %H:%M:%S",
+          time.localtime()) + r" Microsoft API 应用 开始")
+    SendMessage.send_tg_msg(time.strftime(
+        r"%Y-%m-%d %H:%M:%S", time.localtime()) + r"Microsoft API 应用 开始")
+
     Update.update_token()
     cycle_count = random.randint(10, 20)
     for i in range(cycle_count):
@@ -145,3 +164,14 @@ if __name__ == '__main__':
         SendMessage.send_tg_msg(r"第" + str(i + 1) + r"次循环")
         use_api()
         time.sleep(random.randint(30, 60))
+
+    print(time.strftime(r"%Y-%m-%d %H:%M:%S",
+          time.localtime()) + r" Microsoft API 应用 结束")
+    SendMessage.send_tg_msg(time.strftime(
+        r"%Y-%m-%d %H:%M:%S", time.localtime()) + r"Microsoft API 应用 结束")
+    
+    end_time = time.time()
+    time_diff = end_time - start_time
+    format_time_str = format_time(time_diff)
+    print(format_time_str)
+    SendMessage.send_tg_msg(format_time_str)
