@@ -27,7 +27,7 @@ docker compose pull
 ```
 TZ: "Asia/Shanghai" # 必填，默认"Asia/Shanghai"
 TG_BOT_TOKEN: "" # 选填 telegram bot token，可通过 t.me/botfather 获取
-TG_SEND_ID: "11111"  # 选填，如填写，则TG_BOT_TOKEN也要填写 telegram bot 主人的id 需要先给 bot 发一条消息
+TG_SEND_ID: "11111"  # 选填，如填写，则TG_BOT_TOKEN也要填写。这里填写 bot 主人的 id , 需要先给 bot 发一条消息
 CLIENT_ID: "client_id" # 必填
 CLIENT_SECRET: "client_secret" # 必填
 TOKEN_FIRST: "" #必填
@@ -37,7 +37,7 @@ IS_API_URLS_EXTEND: "false" # 可选 是否调用补充 api 接口
 可以先手动执行一次，看看是否成功
 ```
 cd /opt/ms_graph_docker/
-docker compose up -d
+docker compose restart
 ```
 查看日志，看看是否成功
 ```
@@ -61,7 +61,7 @@ docker logs -f ms_graph_docker
 ## 周期执行
 编辑 cron 周期执行表达式，如：
 ```
-0 3,4,5 * * 1-5  cd /opt/ms_graph_docker/;docker compose up -d
+0 3,4,5 * * 1-5  cd /opt/ms_graph_docker/;docker compose restart
 ```
 意思是：从星期一到星期五，每周的第 3、4 和 5 小时后的第 0 分钟执行
 
